@@ -19,7 +19,7 @@
                     <a href="{{route('register')}}" class="hover:text-gray-400 transition duration-300">Register</a>
                 </li>
                 <li>
-                    <a href="#" class="hover:text-gray-400 transition duration-300">Login</a>
+                    <a href="{{route('login')}}" class="hover:text-gray-400 transition duration-300">Login</a>
                 </li>
             </ul>
         </nav>
