@@ -44,13 +44,27 @@ class AuthController extends Controller
 
         // Try to login the user
         if(Auth::attempt($fields, $request->remember)){
-            // Va faire une redirection sur la page ou l'utilisateur voulait êtreavant de se connecter
-            return redirect()->intended('/');
+            // Va faire une redirection sur la page ou l'utilisateur voulait être avant de se connecter
+            return redirect()->intended('dashboard');
         } else {
             // Si les identifiants ne sont pas corrects, on retourne un message d'erreur
             return back()->withErrors([
                 'failed' => 'The provided credentials do not match our records.'
             ]);
         }
+    }
+
+    // Logout User
+    public function logout(Request $request){
+        // Logout
+        Auth::logout();
+
+        // Invalidate session, pour détruire toutes les données associées à la session. Une bonne pratique pour des raisons de sécurité
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        // Redirect
+        return redirect()->route('home');
     }
 }
