@@ -12,12 +12,25 @@ Route::view('/', 'posts.index')->name('home');
 //     return view('auth.register');
 // })->name('register');
 
-Route::view('/register', 'auth.register')->name('register');
-Route::post('/register', [AuthController::class, 'register']);
 
-Route::view('/login', 'auth.login')->name('login');
-Route::post('/login', [AuthController::class, 'login']);
+// Middleware auth qui regroupe plusieurs routes pour éviter de les répéter et donc simplifier le code
+Route::middleware('auth')->group(function () {
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+});
+
+
+// Middleware guest qui regroupe plusieurs routes pour éviter de les répéter et donc simplifier le code
+Route::middleware(['guest'])->group(function () {
+
+    Route::view('/register', 'auth.register')->name('register');
+    Route::post('/register', [AuthController::class, 'register']);
+
+    Route::view('/login', 'auth.login')->name('login');
+    Route::post('/login', [AuthController::class, 'login']);
+});
+
+
 
