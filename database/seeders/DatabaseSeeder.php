@@ -17,6 +17,8 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         // Juste utilisé pour faire de fausses données, utile pour les tests et le développement. Appel de la factory Post pour créer 15 articles.
-        Post::factory(15)->create();
+        Post::factory(2)->create();
     }
 }
+
+// La commande pour lancer le seeder est la suivante: php artisan db:seed

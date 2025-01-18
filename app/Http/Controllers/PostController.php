@@ -13,7 +13,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('posts.index');
+        // Déclaration d'une variable qui va stocker et poster tous les posts. orderBy permet de trier les posts par date de création, du plus récent au plus ancien.
+        $posts = Post::orderBy('created_at', 'desc')->get();
+
+        return view('posts.index', ['posts' => $posts]);
     }
 
     /**
