@@ -16,8 +16,11 @@ class PostFactory extends Factory
      */
     public function definition(): array
     {
+        // Juste utilisé pour faire de fausses données, utile pour les tests et le développement.
         return [
-            //
+            'user_id'=> 1,
+            'title' => $this->faker->sentence(),
+            'body' => $this->faker->paragraph(20),
         ];
     }
 }

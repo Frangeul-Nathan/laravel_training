@@ -20,7 +20,7 @@
             <ul class="flex space-x-6 text-lg">
 
                 <li>
-                    <a href="{{route('home')}}" class="hover:text-gray-400 transition duration-300">Home</a>
+                    <a href="{{route('posts.index')}}" class="hover:text-gray-400 transition duration-300">Home</a>
                 </li>
 
                 {{-- Utilisation du @guest pour montrer dans la barre de recherche seulement aux guest les boutons Register et Login --}}

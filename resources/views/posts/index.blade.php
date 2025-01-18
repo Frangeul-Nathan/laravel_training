@@ -4,13 +4,15 @@
 
 <x-layout>
 
-    @auth
+    {{-- @auth
         <h1>Logged in</h1>
     @endauth
 
     @guest
         <h1>Guest</h1>
-    @endguest
+    @endguest --}}
+
+    <h1>Latest Posts</h1>
     
 </x-layout>
 
