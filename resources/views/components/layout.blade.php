@@ -53,7 +53,7 @@
                             <form action="{{route ('logout')}}" method="POST">
                                 @csrf
                                 <button type="submit" class="text-black pl-4 pr-8 py-2">Logout</button>
-
+                            </form>
                         </div>
                     </div>
                     

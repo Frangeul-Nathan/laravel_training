@@ -39,6 +39,11 @@
             @endforeach
         </div>
     </div>
+
+    <div>
+        {{-- Pagination --}}
+        {{ $posts->links() }}
+    </div>
     
 </x-layout>
 

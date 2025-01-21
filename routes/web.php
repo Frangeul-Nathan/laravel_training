@@ -13,17 +13,22 @@ use App\Http\Controllers\PostController;
 //     return view('auth.register');
 // })->name('register');
 
-Route::redirect('/', '/posts');
 
-// On utilise la méthode resource pour créer plusieurs routes en une seule ligne, un CRUD.
-Route::resource('posts', PostController::class);
+
+Route::namespace('posts')->prefix('posts')->name('posts.')->group(function () {
+    Route::get('/', [PostController::class, 'index'])->name('index');
+    Route::post('/store', [PostController::class, 'store'])->name('store');
+});
+
+
 
 // Middleware auth qui regroupe plusieurs routes pour éviter de les répéter et donc simplifier le code
 Route::middleware('auth')->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');
+
 });
 
 
