@@ -6,8 +6,8 @@
 
     <h1>Hello {{auth()->user()->username}}</h1>
 
-    <body class="bg-gradient-to-r from-blue-50 via-white to-blue-50 text-gray-800">
-        <div class="min-h-screen flex items-center justify-center">
+    <div class="bg-gradient-to-r from-blue-50 via-white to-blue-50 text-gray-800">
+        <div class="flex items-center justify-center mt-32">
             <div class="bg-white shadow-xl rounded-lg p-8 w-full max-w-lg border border-gray-200">
                 <h1 class="text-3xl font-semibold text-center text-blue-600 mb-8">Create a new post</h1>
 
@@ -16,7 +16,8 @@
                 @if (session ('success'))
 
                 <div>
-                    <p>{{ session ('success') }}</p>
+                    {{-- Utilisation d'une prop (voir flashMsg.blade.php) --}}
+                    <x-flashMsg msg="{{ session ('success') }}" />
                 </div>
                     
                 @endif
@@ -64,7 +65,24 @@
                 </form>
             </div>
         </div>
-    </body>
+    </div>
+
+    {{-- User Posts --}}
+    <h1 class="text-3xl font-semibold text-center text-blue-600 mt-32">Your latest posts</h1>
+    <div class="container mx-auto p-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {{-- Boucle foreach pour poster chaque postes de ma bdd --}}
+            @foreach ($posts as $post)
+            {{-- Utilisation de ma props postCard pour alléger le code et le rendre plus lisible --}}
+                <x-postCard :post="$post" />
+            @endforeach
+        </div>
+    </div>
+    <div>
+        {{-- Pagination --}}
+        {{ $posts->links() }}
+    </div> 
+
 </x-layout>
 
 {{-- @endsection --}}

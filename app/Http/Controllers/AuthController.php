@@ -59,8 +59,6 @@ class AuthController extends Controller
         // Logout
         Auth::logout();
 
-        dd('why do you log out');
-
         // Invalidate session, pour détruire toutes les données associées à la session. Une bonne pratique pour des raisons de sécurité
         $request->session()->invalidate();
 

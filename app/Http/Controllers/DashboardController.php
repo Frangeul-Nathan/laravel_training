@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 // use Illuminate\Routing\Controllers\HasMiddleware;
 // use Illuminate\Routing\Controllers\Middleware;
 
@@ -18,7 +21,15 @@ class DashboardController extends Controller
     // }
 
     public function index(){
-        return view('users.dashboard');
+
+        // Façon manuel de le faire mais vu qu'on a déjà fait la relation hasMany on peut le faire d'une façon plus simple
+        // $posts = Post::where('user_id', Auth::id())->get();
+
+        $posts = Post::where('user_id', Auth::id())->orderBy('created_at', 'desc')->paginate(6);
+
+
+        // on passe dans la vue en tant que paramètre ['posts' => $posts]
+        return view('users.dashboard', ['posts' => $posts]);
     }
 
 }
