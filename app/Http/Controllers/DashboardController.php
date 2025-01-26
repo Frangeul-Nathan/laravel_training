@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -30,6 +31,17 @@ class DashboardController extends Controller
 
         // on passe dans la vue en tant que paramètre ['posts' => $posts]
         return view('users.dashboard', ['posts' => $posts]);
+    }
+
+    // Fonction utilisé pour les posts de l'utilisateur en url dynamique
+    public function userPosts(User $user) { 
+
+        $userPosts = $user->posts()->orderBy('created_at', 'desc')->paginate(6);
+
+        return view ('users.posts', [
+            'posts' => $userPosts,
+            'user' => $user
+        ]);
     }
 
 }

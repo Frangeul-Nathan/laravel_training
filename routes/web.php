@@ -20,6 +20,8 @@ Route::namespace('posts')->prefix('posts')->name('posts.')->group(function () {
     Route::post('/store', [PostController::class, 'store'])->name('store');
 });
 
+Route::get('/{user}/posts', [DashboardController::class, 'userPosts'])->name('posts.user');
+
 
 
 // Middleware auth qui regroupe plusieurs routes pour éviter de les répéter et donc simplifier le code

@@ -9,11 +9,9 @@
         <p class="text-gray-600">{{ Str::words($post->body, 15) }}</p>
 
         {{-- Info utilisateur et date --}}
-        <p class="text-sm text-gray-500 pt-4">
-            Posted by <span class="font-medium text-gray-700">Username</span> 
+            {{-- Possible en créant la relation BelongsTo dans le model Post, en tant que 2ème param de la route, passer la relation pour rendre l'url dynamique --}}
+            <span class="text-sm text-gray-500 pt-4">Posted by</span> <a href="{{ route('posts.user', $post->user)}}" class="font-medium text-gray-700">{{$post->user->username}}</a> 
             {{-- diffForHumans est une méthode de Carbon (voir leur doc) et est implémenté directement dans laravel --}}
             {{ $post->created_at->diffForHumans() }}
-        </p>
-
     </div>
 </div>
