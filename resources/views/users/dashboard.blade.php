@@ -4,7 +4,7 @@
 
 <x-layout>
 
-    <h1>Hello {{auth()->user()->username}}</h1>
+    <h1>Welcome {{auth()->user()->username}}, you have {{$posts->total()}} posts</h1>
 
     <div class="bg-gradient-to-r from-blue-50 via-white to-blue-50 text-gray-800">
         <div class="flex items-center justify-center mt-32">
@@ -18,6 +18,11 @@
                 <div>
                     {{-- Utilisation d'une prop (voir flashMsg.blade.php) --}}
                     <x-flashMsg msg="{{ session ('success') }}" />
+                </div>
+                @elseif (session ('delete'))
+                <div>
+                    {{-- Utilisation d'une prop (voir flashMsg.blade.php) --}}
+                    <x-flashMsg msg="{{ session ('delete') }}" bg="bg-red-500"/>
                 </div>
                     
                 @endif
@@ -74,7 +79,14 @@
             {{-- Boucle foreach pour poster chaque postes de ma bdd --}}
             @foreach ($posts as $post)
             {{-- Utilisation de ma props postCard pour alléger le code et le rendre plus lisible --}}
-                <x-postCard :post="$post" />
+                <x-postCard :post="$post"> 
+                    {{-- Delete button --}}
+                    <form action="{{ route ('posts.destroy', $post)}}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="bg-red-500 text-white px-2 py-1 text-xs rounded-md">Delete</button>
+                    </form>
+                </x-postCard>
             @endforeach
         </div>
     </div>

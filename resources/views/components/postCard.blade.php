@@ -18,11 +18,16 @@
             
         @endif
 
-
         {{-- Info utilisateur et date --}}
             {{-- Possible en créant la relation BelongsTo dans le model Post, en tant que 2ème param de la route, passer la relation pour rendre l'url dynamique --}}
             <span class="text-sm text-gray-500 pt-4">Posted by</span> <a href="{{ route('posts.user', $post->user)}}" class="font-medium text-gray-700">{{$post->user->username}}</a> 
             {{-- diffForHumans est une méthode de Carbon (voir leur doc) et est implémenté directement dans laravel --}}
             {{ $post->created_at->diffForHumans() }}
+
+
+            <div class="flex justify-end items-center gap-4 mt-4">
+                {{-- Bouton pour supprimer le post --}}
+                {{ $slot }}
+            </div>
     </div>
 </div>
