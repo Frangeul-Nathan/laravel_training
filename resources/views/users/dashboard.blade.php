@@ -80,6 +80,10 @@
             @foreach ($posts as $post)
             {{-- Utilisation de ma props postCard pour alléger le code et le rendre plus lisible --}}
                 <x-postCard :post="$post"> 
+                    
+                    {{-- Update button --}}
+                    <a class="bg-blue-500 text-white px-2 py-1 text-xs rounded-md" href="{{ route('posts.edit', $post)}}">Update</a>
+
                     {{-- Delete button --}}
                     <form action="{{ route ('posts.destroy', $post)}}" method="POST">
                         @csrf
